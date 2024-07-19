@@ -51,7 +51,8 @@ Function Clear-PnPFolder([Microsoft.SharePoint.Client.Folder]$Folder) {
             # Recurse into children.
             Clear-PnPFolder -Folder $SubFolder
             # Finally delete the now empty folder.
-            Remove-PnPFolder -Name $SubFolder.Name -Folder $Site + $FolderSiteRelativeURL -Force -Recycle
+            $SitePathURL = $SitePath + $FolderSiteRelativeURL
+            Remove-PnPFolder -Name $SubFolder.Name -Folder $SitePathURL -Force -Recycle
             Write-Information ("Deleted Folder: '{0}' at '{1}'" -f $SubFolder.Name, $SubFolder.ServerRelativeURL)
         }
     }
